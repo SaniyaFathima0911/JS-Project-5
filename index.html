@@ -169,81 +169,94 @@
         const timerDisplay = document.getElementById("timer");
         const endScreen = document.getElementById("end-screen");
         const finalScoreDisplay = document.getElementById("final-score");
+        
         let score = 0;
         let timeLeft = 30;
         let gameInterval;
         let timerInterval;
         let gameEnded = false;
-
+    
+        console.log("🎮 Game initialized.");
+    
         function createBalloon() {
             if (gameEnded) return;
-
+    
             const balloon = document.createElement("div");
             balloon.classList.add("balloon");
             balloon.style.backgroundColor = getRandomColor();
             balloon.style.left = Math.random() * (window.innerWidth - 60) + "px";
             balloon.style.bottom = "-100px";
             gameContainer.appendChild(balloon);
-
+    
+            console.log("New balloon created at:", balloon.style.left);
+    
             let moveInterval = setInterval(() => {
                 if (gameEnded) {
                     clearInterval(moveInterval);
                     return;
                 }
-
+    
                 let currentBottom = parseInt(window.getComputedStyle(balloon).bottom);
                 if (currentBottom >= window.innerHeight) {
                     balloon.remove();
                     clearInterval(moveInterval);
+                    console.log("Balloon removed (out of screen)");
                 } else {
                     balloon.style.bottom = currentBottom + 2 + "px";
                 }
             }, 20);
-
+    
             balloon.addEventListener("mouseover", () => {
                 if (gameEnded) return;
-
+    
+                console.log("Balloon popped! Score updated.");
                 const popSound = document.getElementById("pop-sound");
                 popSound.currentTime = 0;
                 popSound.play();
-
+    
                 balloon.style.animation = "pop 0.3s forwards";
                 setTimeout(() => balloon.remove(), 300);
                 clearInterval(moveInterval);
                 score++;
                 scoreDisplay.textContent = score;
             });
-
         }
-
+    
         function getRandomColor() {
             const colors = ["#434660", "#b87300", "#1c4845", "#904c42", "#66405c", "#000000"];
-            return colors[Math.floor(Math.random() * colors.length)];
+            const selectedColor = colors[Math.floor(Math.random() * colors.length)];
+            console.log("Balloon color:", selectedColor);
+            return selectedColor;
         }
-
+    
         function startBalloonRain() {
             if (gameEnded) return;
+            console.log("Balloon rain started.");
             gameInterval = setInterval(() => {
                 for (let i = 0; i < 3; i++) {
                     createBalloon();
                 }
             }, 2000);
         }
-
+    
         function startTimer() {
+            console.log("Timer started: 30 seconds remaining.");
             timerInterval = setInterval(() => {
                 if (gameEnded) return;
-
+    
                 if (timeLeft <= 0) {
+                    console.log("Time's up! Ending game.");
                     endGame();
                 } else {
                     timeLeft--;
                     timerDisplay.textContent = timeLeft;
+                    console.log("Time left:", timeLeft, "seconds.");
                 }
             }, 1000);
         }
-
+    
         function resetGame() {
+            console.log("Game reset.");
             score = 0;
             timeLeft = 30;
             gameEnded = false;
@@ -253,23 +266,25 @@
             gameContainer.innerHTML = "";
             startGame();
         }
-
+    
         function endGame() {
+            console.log("Game over! Final Score:", score);
             gameEnded = true;
             clearInterval(gameInterval);
             clearInterval(timerInterval);
             finalScoreDisplay.textContent = score;
             endScreen.style.display = "block";
         }
-
-
+    
         function startGame() {
+            console.log("Game started!");
             startBalloonRain();
             startTimer();
         }
-
+    
         startGame();
     </script>
+    
 </body>
 
 </html>
