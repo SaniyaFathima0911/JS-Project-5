@@ -200,15 +200,6 @@
                 }
             }, 20);
 
-            // balloon.addEventListener("mouseover", () => {
-            //     if (gameEnded) return;
-
-            //     balloon.style.animation = "pop 0.3s forwards";
-            //     setTimeout(() => balloon.remove(), 300);
-            //     clearInterval(moveInterval);
-            //     score++;
-            //     scoreDisplay.textContent = score;
-            // });
             balloon.addEventListener("mouseover", () => {
                 if (gameEnded) return;
 
@@ -252,13 +243,6 @@
             }, 1000);
         }
 
-        // function endGame() {
-        //     gameEnded = true;
-        //     clearInterval(gameInterval);
-        //     clearInterval(timerInterval);
-        //     finalScoreDisplay.textContent = score;
-        //     endScreen.style.display = "block";
-        // }
         function resetGame() {
             score = 0;
             timeLeft = 30;
