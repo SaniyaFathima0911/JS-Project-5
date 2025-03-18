@@ -189,6 +189,7 @@
             gameContainer.appendChild(balloon);
     
             console.log("New balloon created at:", balloon.style.left);
+            console.log( "bottom:", balloon.style.bottom);
     
             let moveInterval = setInterval(() => {
                 if (gameEnded) {
@@ -225,6 +226,7 @@
         function getRandomColor() {
             const colors = ["#434660", "#b87300", "#1c4845", "#904c42", "#66405c", "#000000"];
             const selectedColor = colors[Math.floor(Math.random() * colors.length)];
+            console.log("length",colors.length)
             console.log("Balloon color:", selectedColor);
             return selectedColor;
         }
