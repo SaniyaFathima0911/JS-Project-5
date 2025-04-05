@@ -163,7 +163,7 @@
         <audio id="pop-sound" src="pop-39222.mp3"></audio>
     </div>
 
-    <script>
+    <script>    
         const gameContainer = document.getElementById("game-container");
         const scoreDisplay = document.getElementById("score");
         const timerDisplay = document.getElementById("timer");
@@ -205,6 +205,8 @@
                 } else {
                     balloon.style.bottom = currentBottom + 2 + "px";
                 }
+                console.log("currentbottom", currentBottom)
+                console.log("innerheight", window.innerHeight)
             }, 20);
     
             balloon.addEventListener("mouseover", () => {
@@ -227,7 +229,7 @@
             const colors = ["#434660", "#b87300", "#1c4845", "#904c42", "#66405c", "#000000"];
             const selectedColor = colors[Math.floor(Math.random() * colors.length)];
             console.log("length",colors.length)
-            console.log("Balloon color:", selectedColor);
+            console.log("Balloon color:", selectedColor);      
             return selectedColor;
         }
     
